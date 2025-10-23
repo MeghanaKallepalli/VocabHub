@@ -1,0 +1,192 @@
+:root {
+  --color-primary: #F5AD18;
+  --color-accent-bright: #A12A62;
+  --color-accent-medium: #802050;
+  --color-accent-dark: #5C163A;
+  --color-text-light: #ffffff;
+  --color-text-dark: #212529;
+  --color-background: #f8f9fa;
+  --color-card: #ffffff;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-dark);
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  /* CHANGED: Removed horizontal padding from the main container */
+  padding: 1rem 0;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  padding-bottom: 1rem;
+  /* ADDED: Add padding here instead of the main container */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.app-header h1 {
+  font-size: 2.2rem;
+  color: var(--color-accent-dark);
+  margin: 0;
+}
+
+/* Sticky Header for Search */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  /* THIS IS THE KEY FIX: Ensure background is solid */
+  background-color: var(--color-background);
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  /* CHANGED: Removed negative margin and simplified padding */
+  padding: 1rem;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(245, 173, 24, 0.25);
+}
+
+/* Content Area */
+.content-area {
+  padding-top: 1.5rem;
+  /* ADDED: Add padding here so the cards don't touch the edges */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Word List */
+.word-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Word Card */
+.word-card {
+  background-color: var(--color-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left: 5px solid var(--color-primary);
+  position: relative;
+}
+
+.word-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.word-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--color-accent-dark);
+}
+
+.word-card .meaning {
+  color: #555;
+  line-height: 1.6;
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+}
+
+.word-card.revealed .meaning {
+  visibility: visible;
+  opacity: 1;
+  max-height: 500px;
+  margin-top: 1rem;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.delete-btn:hover {
+  color: var(--color-accent-bright);
+}
+
+.no-words {
+  text-align: center;
+  color: #777;
+  grid-column: 1 / -1;
+  font-size: 1.2rem;
+  padding: 2rem;
+}
+
+
+/* Filter Controls from last step - these are still correct */
+.filter-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.date-filter select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  background-color: white;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.65em auto;
+  box-sizing: border-box;
+}
+
+.date-filter select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(245, 173, 24, 0.25);
+}
+
+@media (min-width: 768px) {
+  .filter-controls {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .search-bar {
+    flex-grow: 1;
+  }
+
+  .date-filter select {
+    min-width: 180px;
+  }
+}
